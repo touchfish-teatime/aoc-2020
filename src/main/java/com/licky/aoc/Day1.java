@@ -244,6 +244,7 @@ class Day1 {
         }
     }
 
+    // 排序，双指针
     public static void threeSum() {
         var sortedInput = Arrays.stream(input).sorted().toArray();
         int count = 0;
