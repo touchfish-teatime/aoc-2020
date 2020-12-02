@@ -1040,7 +1040,7 @@ public class Day2 {
             var sign = password.type.charAt(0);
             var min = password.value.charAt(password.min-1);
             var max = password.value.charAt(password.max-1);
-            return (min == sign && max != sign) || (min != sign && max == sign);
+            return (min == sign) != (max == sign);
         }).count();
         System.out.println(sum);
     }
