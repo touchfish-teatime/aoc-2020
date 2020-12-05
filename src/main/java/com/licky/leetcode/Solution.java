@@ -1,8 +1,7 @@
 package com.licky.leetcode;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Solution {
@@ -207,6 +206,67 @@ public class Solution {
         return builder.toString();
     }
 
+    public static int reverse(int x) {
+        var num = Integer.valueOf(x).toString();
+        if (num.startsWith("-")) {
+            var s = num.substring(1).chars().mapToObj(Character::toString).collect(Collectors.toList());
+            Collections.reverse(s);
+            var result = "-" + String.join("", s);
+            var re = Double.parseDouble(result);
+            if (re < Integer.MIN_VALUE) {
+                return 0;
+            }
+            return (int) re;
+        } else {
+            var s = num.chars().mapToObj(Character::toString).collect(Collectors.toList());
+            Collections.reverse(s);
+            var result = String.join("", s);
+            var re = Double.parseDouble(result);
+            if (re > Integer.MAX_VALUE) {
+                return 0;
+            }
+            return (int) re;
+        }
+    }
+
+    public static int reverse2(int x) {
+
+        var y = (double) x;
+        var ints = new ArrayList<Integer>();
+        var fushu = y < 0;
+        if (fushu) {
+            y = -y;
+        }
+
+        do {
+            var num = y % 10;
+            ints.add((int) num);
+            y = (y - num) / 10;
+        } while (y != 0);
+
+        var num = Double.parseDouble(ints.stream().map(String::valueOf).collect(Collectors.joining("")));
+
+        if (num > Integer.MAX_VALUE) {
+            return 0;
+        } else if (fushu) {
+            return (int) -num;
+        }
+        return (int) num;
+    }
+
+    public static int hammingWeight(int n) {
+        int count = (n & Integer.MIN_VALUE) == Integer.MIN_VALUE ? 1 : 0;
+        for (int i = 0; i < 32; i++) {
+            n = n << 1;
+            if ((n & Integer.MIN_VALUE) == Integer.MIN_VALUE) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
+        hammingWeight(0b11111111111111111111111111111101);
+//        System.out.println(reverse2(-2147483648));
     }
 }
