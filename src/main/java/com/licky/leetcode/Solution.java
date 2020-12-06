@@ -265,8 +265,93 @@ public class Solution {
         return count;
     }
 
+    public static List<List<Integer>> generate(int numRows) {
+
+        var generate = new ArrayList<List<Integer>>();
+
+        for (int i = 0; i < numRows; ++i) {
+            if (i == 0) {
+                generate.add(new ArrayList<>() {
+                    {
+                        add(1);
+                    }
+                });
+            } else {
+                var newRow = new ArrayList<Integer>();
+                var pre = generate.get(i - 1);
+                for (int j = 0; j < i + 1; ++j) {
+                    var left = j - 1;
+
+                    if (left == -1) {
+                        newRow.add(pre.get(j));
+                    } else if (j == pre.size()) {
+                        newRow.add(pre.get(left));
+                    } else {
+                        newRow.add(pre.get(j) + pre.get(left));
+                    }
+                }
+
+                generate.add(newRow);
+            }
+        }
+
+        return generate;
+    }
+
+    public static String longestPalindrome(String s) {
+        if (s.length() == 0 || s.length() == 1) {
+            return s;
+        }
+
+        var chars = s.toCharArray();
+        var maxStart = 0;
+        var maxEnd = 0;
+        var max = 0;
+
+        for (var start = 0; start < chars.length; ++start) {
+            if(chars.length -start <max){
+                break;
+            }
+            for (var end = chars.length-1; end >= start; --end) {
+                if (isPalindrome(s.substring(start, end + 1))) {
+                    if (end - start >= max) {
+                        max = end - start;
+                        maxStart = start;
+                        maxEnd = end;
+                    }
+                }
+            }
+        }
+
+        return s.substring(maxStart, maxEnd + 1);
+    }
+
+    public static boolean isPalindrome(String chars) {
+        if (chars.length() == 1) {
+            return true;
+        }
+        var start = 0;
+        var end = chars.length() - 1;
+        while (start < end) {
+            if (chars.charAt(start) != chars.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
-        hammingWeight(0b11111111111111111111111111111101);
+
+        var start = System.currentTimeMillis();
+        System.out.println(longestPalindrome("1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"));
+
+        var end = System.currentTimeMillis();
+
+        System.out.println(end - start);
+//        generate(5);
+//        hammingWeight(0b11111111111111111111111111111101);
 //        System.out.println(reverse2(-2147483648));
     }
 }
