@@ -13,7 +13,7 @@ public class Day6 {
     }
 
     private static void partOne() throws IOException {
-        var input = Files.readString(Path.of("./src/main/java/com/licky/aoc/6.txt"));
+        var input = Files.readString(Path.of("src/main/resources/6.txt"));
 
         var groups = input.split("\n\n");
 
@@ -34,7 +34,7 @@ public class Day6 {
     }
 
     private static void partTwo() throws IOException {
-        var input = Files.readString(Path.of("./src/main/java/com/licky/aoc/6.txt"));
+        var input = Files.readString(Path.of("src/main/resources/6.txt"));
 
         var groups = input.split("\n\n");
 

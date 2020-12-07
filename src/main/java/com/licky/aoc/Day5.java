@@ -13,7 +13,7 @@ public class Day5 {
     }
 
     private static void partOne() throws IOException {
-        var input = Files.readString(Path.of("./src/main/java/com/licky/aoc/5.txt"));
+        var input = Files.readString(Path.of("src/main/resources/5.txt"));
 
         var strings = input.split("\n");
         int[] ids = new int[strings.length];

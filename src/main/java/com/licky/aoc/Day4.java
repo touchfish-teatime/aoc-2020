@@ -19,7 +19,7 @@ public class Day4 {
     }
 
     private static void partOne() throws IOException {
-        var input = Files.readString(Path.of("./src/main/java/com/licky/aoc/4.txt"));
+        var input = Files.readString(Path.of("src/main/resources/4.txt"));
         var result = Arrays.stream(input.split("\n\n"))
                 .map(passport -> passport.replaceAll("\n", " "))
                 .filter(passport -> {
